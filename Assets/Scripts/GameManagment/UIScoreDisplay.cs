@@ -17,6 +17,7 @@ public class UIScoreDisplay : MonoBehaviour
     private void Awake()
     {
         _scoreText = GetComponent<TextMeshProUGUI>();
+        playerBalance = FindObjectOfType<PlayerBalance>();
         UpdateScoreText();
         
     }
@@ -28,8 +29,7 @@ public class UIScoreDisplay : MonoBehaviour
         }
         catch (Exception e)
         {
-            print("error");
-            print(e.Message);
+            Debug.LogError("We got an error, sir: " + e.Message);
         }
     }
 }
