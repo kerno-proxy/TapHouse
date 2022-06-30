@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SafeManager : MonoBehaviour
 {
@@ -14,10 +15,18 @@ public class SafeManager : MonoBehaviour
     float _safeFillUpFrequencyInSeconds = 0f;
     [SerializeField]
     int _safeNextUpgradeCost = 0;
+    [SerializeField]
+    int _safeInitialValue = 0;
+    [SerializeField]
+    Text _safeText;
+   
+
 
     private void Start()
     {
         
+        ResetSafe();
+       
         InvokeRepeating("AddToSafe", 2.0f, _safeFillUpFrequencyInSeconds);
     }
     //This method can be used to increase value in other cases (like bonus increase from advertisement or something)
@@ -32,6 +41,7 @@ public class SafeManager : MonoBehaviour
             _currentSafeValue = _currentSafeCapacity;
             print("Safe capacity reached");
         }
+        SetSafeText();
 
     }
     //This method is only for InvokeRepeating.
@@ -46,7 +56,25 @@ public class SafeManager : MonoBehaviour
             _currentSafeValue = _currentSafeCapacity;
             print("Safe capacity reached");
         }
-       
+        SetSafeText();
     }
-
+    public int GetSafeCurrentValue()
+    {
+        return _currentSafeValue;
+    }
+    private void SetSafeValue(int value)
+    {
+        _currentSafeValue = value;
+        SetSafeText();
+    }
+    public void ResetSafe()
+    {
+        SetSafeValue(_safeInitialValue);
+        SetSafeText();
+    }
+    private void SetSafeText()
+    {
+        _safeText = GameObject.Find("SafeText").GetComponent<Text>();
+        _safeText.text = "SAFE: " + GetSafeCurrentValue();
+    }
 }

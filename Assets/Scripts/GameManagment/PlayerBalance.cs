@@ -11,7 +11,13 @@ public class PlayerBalance : MonoBehaviour
     int _playerCurrentGems = 0;
     [SerializeField]
     int _tapValue = 0;
-        
+    [SerializeField]
+    SafeManager safeManager;
+
+    private void Awake()
+    {
+        safeManager = GetComponent<SafeManager>();
+    }
     public void PlayerCurrencyIncrease()
     {
         _playerCurrentBalance += _tapValue;
@@ -24,5 +30,12 @@ public class PlayerBalance : MonoBehaviour
     public int GetPlayerCurrentBalance()
     {
         return _playerCurrentBalance;
+    }
+    public void EmptySafe()
+    {
+        _playerCurrentBalance += safeManager.GetSafeCurrentValue();
+        Debug.Log("Adding " + safeManager.GetSafeCurrentValue() + " to player's balance");
+        safeManager.ResetSafe();
+        
     }
 }
