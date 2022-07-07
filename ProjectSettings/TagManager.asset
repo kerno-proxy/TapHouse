@@ -11,7 +11,7 @@ TagManager:
   - BackGround
   - Water
   - UI
-  - 
+  - FrontUIElements
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: FrontUIElements
+    uniqueID: 4126362373
     locked: 0
   - name: Background
     uniqueID: 1259984939

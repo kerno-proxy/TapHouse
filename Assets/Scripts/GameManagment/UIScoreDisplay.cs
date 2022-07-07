@@ -25,7 +25,7 @@ public class UIScoreDisplay : MonoBehaviour
     {
         try
         {
-            _scoreText.text = "Score: " + playerBalance.GetPlayerCurrentBalance().ToString();
+            _scoreText.text = "Coins: " + playerBalance.GetPlayerCurrentBalance().ToString();
         }
         catch (Exception e)
         {

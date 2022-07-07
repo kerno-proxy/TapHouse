@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerBalance : MonoBehaviour
 {
@@ -13,18 +14,24 @@ public class PlayerBalance : MonoBehaviour
     int _tapValue = 0;
     [SerializeField]
     SafeManager safeManager;
+    [SerializeField]
+    TextMeshProUGUI coinsValue;
 
     private void Awake()
     {
         safeManager = GetComponent<SafeManager>();
+        coinsValue = GameObject.Find("CoinsValue").GetComponent<TextMeshProUGUI>();
     }
+   
     public void PlayerCurrencyIncrease()
     {
-        _playerCurrentBalance += _tapValue;
+        _playerCurrentBalance += _tapValue; 
+        UpdatePlayerCoinsValue();
     }
     public void PlayerCurrencyIncrease(int value)
     {
         _playerCurrentBalance += value;
+       
     }
 
     public int GetPlayerCurrentBalance()
@@ -34,8 +41,13 @@ public class PlayerBalance : MonoBehaviour
     public void EmptySafe()
     {
         _playerCurrentBalance += safeManager.GetSafeCurrentValue();
-        Debug.Log("Adding " + safeManager.GetSafeCurrentValue() + " to player's balance");
+        UpdatePlayerCoinsValue();
         safeManager.ResetSafe();
         
+        
+    }
+    private void UpdatePlayerCoinsValue()
+    {
+        coinsValue.text = "Coins: " + _playerCurrentBalance.ToString();
     }
 }
